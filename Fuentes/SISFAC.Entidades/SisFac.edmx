@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SisFacModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SisFacModelStoreContainer">
+          <EntitySet Name="Cargos" EntityType="SisFacModel.Store.Cargos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Categorias" EntityType="SisFacModel.Store.Categorias" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ciudades" EntityType="SisFacModel.Store.Ciudades" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clientes" EntityType="SisFacModel.Store.Clientes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DetallesVenta" EntityType="SisFacModel.Store.DetallesVenta" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Empleados" EntityType="SisFacModel.Store.Empleados" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Productos" EntityType="SisFacModel.Store.Productos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Regiones" EntityType="SisFacModel.Store.Regiones" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ventas" EntityType="SisFacModel.Store.Ventas" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CIUDADES_REFERENCE_REGIONES" Association="SisFacModel.Store.FK_CIUDADES_REFERENCE_REGIONES">
+            <End Role="Regiones" EntitySet="Regiones" />
+            <End Role="Ciudades" EntitySet="Ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTES_REFERENCE_CIUDADES" Association="SisFacModel.Store.FK_CLIENTES_REFERENCE_CIUDADES">
+            <End Role="Ciudades" EntitySet="Ciudades" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTES_REFERENCE_REGIONES" Association="SisFacModel.Store.FK_CLIENTES_REFERENCE_REGIONES">
+            <End Role="Regiones" EntitySet="Regiones" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_REFERENCE_PRODUCTO" Association="SisFacModel.Store.FK_DETALLES_REFERENCE_PRODUCTO">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_REFERENCE_VENTAS" Association="SisFacModel.Store.FK_DETALLES_REFERENCE_VENTAS">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_REFERENCE_CARGOS" Association="SisFacModel.Store.FK_EMPLEADO_REFERENCE_CARGOS">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_REFERENCE_CIUDADES" Association="SisFacModel.Store.FK_EMPLEADO_REFERENCE_CIUDADES">
+            <End Role="Ciudades" EntitySet="Ciudades" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_REFERENCE_REGIONES" Association="SisFacModel.Store.FK_EMPLEADO_REFERENCE_REGIONES">
+            <End Role="Regiones" EntitySet="Regiones" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_REFERENCE_CATEGORI" Association="SisFacModel.Store.FK_PRODUCTO_REFERENCE_CATEGORI">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTAS_REFERENCE_CLIENTES" Association="SisFacModel.Store.FK_VENTAS_REFERENCE_CLIENTES">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTAS_REFERENCE_EMPLEADO" Association="SisFacModel.Store.FK_VENTAS_REFERENCE_EMPLEADO">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="idCargo" />
+          </Key>
+          <Property Name="idCargo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Cargo" Type="varchar" Nullable="false" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Name="idCategoria" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Name="idCiudad" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idRegion" Type="int" />
+          <Property Name="Ciudad" Type="varchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="int" Nullable="false" />
+          <Property Name="RUTVer" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="Empresa" Type="bit" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="ApPaterno" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="ApMaterno" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="FechaNac" Type="date" />
+          <Property Name="Sexo" Type="bit" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="30" />
+          <Property Name="idRegion" Type="int" />
+          <Property Name="idCiudad" Type="int" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetallesVenta">
+          <Key>
+            <PropertyRef Name="idDetalleVenta" />
+          </Key>
+          <Property Name="idDetalleVenta" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idVenta" Type="int" Nullable="false" />
+          <Property Name="idProducto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="int" Nullable="false" />
+          <Property Name="RUTVer" Type="varchar" Nullable="false" MaxLength="1" />
+          <Property Name="Nombres" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="ApPaterno" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="ApMaterno" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="FechaNac" Type="date" />
+          <Property Name="Sexo" Type="bit" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="30" />
+          <Property Name="idRegion" Type="int" />
+          <Property Name="idCiudad" Type="int" />
+          <Property Name="idCargo" Type="int" Nullable="false" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Name="idProducto" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="Producto" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Valor" Type="int" Nullable="false" />
+          <Property Name="Comentario" Type="varchar" MaxLength="60" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regiones">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Name="idRegion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Region" Type="varchar" Nullable="false" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="idVenta" />
+          </Key>
+          <Property Name="idVenta" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TipoVenta" Type="int" Nullable="false" />
+          <Property Name="RUTEmpleado" Type="int" Nullable="false" />
+          <Property Name="RUTCliente" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Descuento" Type="int" />
+          <Property Name="Pagado" Type="bit" />
+          <Property Name="Entregado" Type="bit" />
+        </EntityType>
+        <Association Name="FK_CIUDADES_REFERENCE_REGIONES">
+          <End Role="Regiones" Type="SisFacModel.Store.Regiones" Multiplicity="0..1" />
+          <End Role="Ciudades" Type="SisFacModel.Store.Ciudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiones">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Ciudades">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTES_REFERENCE_CIUDADES">
+          <End Role="Ciudades" Type="SisFacModel.Store.Ciudades" Multiplicity="0..1" />
+          <End Role="Clientes" Type="SisFacModel.Store.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudades">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTES_REFERENCE_REGIONES">
+          <End Role="Regiones" Type="SisFacModel.Store.Regiones" Multiplicity="0..1" />
+          <End Role="Clientes" Type="SisFacModel.Store.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiones">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_REFERENCE_PRODUCTO">
+          <End Role="Productos" Type="SisFacModel.Store.Productos" Multiplicity="1" />
+          <End Role="DetallesVenta" Type="SisFacModel.Store.DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_REFERENCE_VENTAS">
+          <End Role="Ventas" Type="SisFacModel.Store.Ventas" Multiplicity="1" />
+          <End Role="DetallesVenta" Type="SisFacModel.Store.DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="idVenta" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="idVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_REFERENCE_CARGOS">
+          <End Role="Cargos" Type="SisFacModel.Store.Cargos" Multiplicity="1" />
+          <End Role="Empleados" Type="SisFacModel.Store.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="idCargo" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_REFERENCE_CIUDADES">
+          <End Role="Ciudades" Type="SisFacModel.Store.Ciudades" Multiplicity="0..1" />
+          <End Role="Empleados" Type="SisFacModel.Store.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudades">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_REFERENCE_REGIONES">
+          <End Role="Regiones" Type="SisFacModel.Store.Regiones" Multiplicity="0..1" />
+          <End Role="Empleados" Type="SisFacModel.Store.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiones">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_REFERENCE_CATEGORI">
+          <End Role="Categorias" Type="SisFacModel.Store.Categorias" Multiplicity="1" />
+          <End Role="Productos" Type="SisFacModel.Store.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTAS_REFERENCE_CLIENTES">
+          <End Role="Clientes" Type="SisFacModel.Store.Clientes" Multiplicity="1" />
+          <End Role="Ventas" Type="SisFacModel.Store.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="RUTCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTAS_REFERENCE_EMPLEADO">
+          <End Role="Empleados" Type="SisFacModel.Store.Empleados" Multiplicity="1" />
+          <End Role="Ventas" Type="SisFacModel.Store.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="RUTEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="PA_Documento_de_venta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idventa" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SisFacModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SisFacEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cargos" EntityType="SisFacModel.Cargos" />
+          <EntitySet Name="Categorias" EntityType="SisFacModel.Categorias" />
+          <EntitySet Name="Ciudades" EntityType="SisFacModel.Ciudades" />
+          <EntitySet Name="Clientes" EntityType="SisFacModel.Clientes" />
+          <EntitySet Name="DetallesVenta" EntityType="SisFacModel.DetallesVenta" />
+          <EntitySet Name="Empleados" EntityType="SisFacModel.Empleados" />
+          <EntitySet Name="Productos" EntityType="SisFacModel.Productos" />
+          <EntitySet Name="Regiones" EntityType="SisFacModel.Regiones" />
+          <EntitySet Name="Ventas" EntityType="SisFacModel.Ventas" />
+          <AssociationSet Name="FK_EMPLEADO_REFERENCE_CARGOS" Association="SisFacModel.FK_EMPLEADO_REFERENCE_CARGOS">
+            <End Role="Cargos" EntitySet="Cargos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRODUCTO_REFERENCE_CATEGORI" Association="SisFacModel.FK_PRODUCTO_REFERENCE_CATEGORI">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CIUDADES_REFERENCE_REGIONES" Association="SisFacModel.FK_CIUDADES_REFERENCE_REGIONES">
+            <End Role="Regiones" EntitySet="Regiones" />
+            <End Role="Ciudades" EntitySet="Ciudades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTES_REFERENCE_CIUDADES" Association="SisFacModel.FK_CLIENTES_REFERENCE_CIUDADES">
+            <End Role="Ciudades" EntitySet="Ciudades" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_REFERENCE_CIUDADES" Association="SisFacModel.FK_EMPLEADO_REFERENCE_CIUDADES">
+            <End Role="Ciudades" EntitySet="Ciudades" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTES_REFERENCE_REGIONES" Association="SisFacModel.FK_CLIENTES_REFERENCE_REGIONES">
+            <End Role="Regiones" EntitySet="Regiones" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTAS_REFERENCE_CLIENTES" Association="SisFacModel.FK_VENTAS_REFERENCE_CLIENTES">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_REFERENCE_PRODUCTO" Association="SisFacModel.FK_DETALLES_REFERENCE_PRODUCTO">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLES_REFERENCE_VENTAS" Association="SisFacModel.FK_DETALLES_REFERENCE_VENTAS">
+            <End Role="Ventas" EntitySet="Ventas" />
+            <End Role="DetallesVenta" EntitySet="DetallesVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMPLEADO_REFERENCE_REGIONES" Association="SisFacModel.FK_EMPLEADO_REFERENCE_REGIONES">
+            <End Role="Regiones" EntitySet="Regiones" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VENTAS_REFERENCE_EMPLEADO" Association="SisFacModel.FK_VENTAS_REFERENCE_EMPLEADO">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cargos">
+          <Key>
+            <PropertyRef Name="idCargo" />
+          </Key>
+          <Property Type="Int32" Name="idCargo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Cargo" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Empleados" Relationship="SisFacModel.FK_EMPLEADO_REFERENCE_CARGOS" FromRole="Cargos" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="idCategoria" />
+          </Key>
+          <Property Type="Int32" Name="idCategoria" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Categoria" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productos" Relationship="SisFacModel.FK_PRODUCTO_REFERENCE_CATEGORI" FromRole="Categorias" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Type="Int32" Name="idCiudad" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idRegion" />
+          <Property Type="String" Name="Ciudad" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Regiones" Relationship="SisFacModel.FK_CIUDADES_REFERENCE_REGIONES" FromRole="Ciudades" ToRole="Regiones" />
+          <NavigationProperty Name="Clientes" Relationship="SisFacModel.FK_CLIENTES_REFERENCE_CIUDADES" FromRole="Ciudades" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="SisFacModel.FK_EMPLEADO_REFERENCE_CIUDADES" FromRole="Ciudades" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Type="Int32" Name="RUT" Nullable="false" />
+          <Property Type="String" Name="RUTVer" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Empresa" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ApPaterno" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ApMaterno" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="FechaNac" />
+          <Property Type="Boolean" Name="Sexo" />
+          <Property Type="String" Name="Email" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Telefono" />
+          <Property Type="String" Name="Direccion" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="idRegion" />
+          <Property Type="Int32" Name="idCiudad" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <NavigationProperty Name="Ciudades" Relationship="SisFacModel.FK_CLIENTES_REFERENCE_CIUDADES" FromRole="Clientes" ToRole="Ciudades" />
+          <NavigationProperty Name="Regiones" Relationship="SisFacModel.FK_CLIENTES_REFERENCE_REGIONES" FromRole="Clientes" ToRole="Regiones" />
+          <NavigationProperty Name="Ventas" Relationship="SisFacModel.FK_VENTAS_REFERENCE_CLIENTES" FromRole="Clientes" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="DetallesVenta">
+          <Key>
+            <PropertyRef Name="idDetalleVenta" />
+          </Key>
+          <Property Type="Int64" Name="idDetalleVenta" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idVenta" Nullable="false" />
+          <Property Type="Int32" Name="idProducto" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Valor" Nullable="false" />
+          <NavigationProperty Name="Productos" Relationship="SisFacModel.FK_DETALLES_REFERENCE_PRODUCTO" FromRole="DetallesVenta" ToRole="Productos" />
+          <NavigationProperty Name="Ventas" Relationship="SisFacModel.FK_DETALLES_REFERENCE_VENTAS" FromRole="DetallesVenta" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Type="Int32" Name="RUT" Nullable="false" />
+          <Property Type="String" Name="RUTVer" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ApPaterno" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ApMaterno" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="FechaNac" />
+          <Property Type="Boolean" Name="Sexo" />
+          <Property Type="String" Name="Email" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Telefono" />
+          <Property Type="String" Name="Direccion" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="idRegion" />
+          <Property Type="Int32" Name="idCiudad" />
+          <Property Type="Int32" Name="idCargo" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <NavigationProperty Name="Cargos" Relationship="SisFacModel.FK_EMPLEADO_REFERENCE_CARGOS" FromRole="Empleados" ToRole="Cargos" />
+          <NavigationProperty Name="Ciudades" Relationship="SisFacModel.FK_EMPLEADO_REFERENCE_CIUDADES" FromRole="Empleados" ToRole="Ciudades" />
+          <NavigationProperty Name="Regiones" Relationship="SisFacModel.FK_EMPLEADO_REFERENCE_REGIONES" FromRole="Empleados" ToRole="Regiones" />
+          <NavigationProperty Name="Ventas" Relationship="SisFacModel.FK_VENTAS_REFERENCE_EMPLEADO" FromRole="Empleados" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="idProducto" />
+          </Key>
+          <Property Type="Int32" Name="idProducto" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idCategoria" Nullable="false" />
+          <Property Type="String" Name="Producto" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Valor" Nullable="false" />
+          <Property Type="String" Name="Comentario" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <NavigationProperty Name="Categorias" Relationship="SisFacModel.FK_PRODUCTO_REFERENCE_CATEGORI" FromRole="Productos" ToRole="Categorias" />
+          <NavigationProperty Name="DetallesVenta" Relationship="SisFacModel.FK_DETALLES_REFERENCE_PRODUCTO" FromRole="Productos" ToRole="DetallesVenta" />
+        </EntityType>
+        <EntityType Name="Regiones">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Type="Int32" Name="idRegion" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Region" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ciudades" Relationship="SisFacModel.FK_CIUDADES_REFERENCE_REGIONES" FromRole="Regiones" ToRole="Ciudades" />
+          <NavigationProperty Name="Clientes" Relationship="SisFacModel.FK_CLIENTES_REFERENCE_REGIONES" FromRole="Regiones" ToRole="Clientes" />
+          <NavigationProperty Name="Empleados" Relationship="SisFacModel.FK_EMPLEADO_REFERENCE_REGIONES" FromRole="Regiones" ToRole="Empleados" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="idVenta" />
+          </Key>
+          <Property Type="Int32" Name="idVenta" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TipoVenta" Nullable="false" />
+          <Property Type="Int32" Name="RUTEmpleado" Nullable="false" />
+          <Property Type="Int32" Name="RUTCliente" Nullable="false" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Int32" Name="Descuento" />
+          <Property Type="Boolean" Name="Pagado" />
+          <Property Type="Boolean" Name="Entregado" />
+          <NavigationProperty Name="Clientes" Relationship="SisFacModel.FK_VENTAS_REFERENCE_CLIENTES" FromRole="Ventas" ToRole="Clientes" />
+          <NavigationProperty Name="DetallesVenta" Relationship="SisFacModel.FK_DETALLES_REFERENCE_VENTAS" FromRole="Ventas" ToRole="DetallesVenta" />
+          <NavigationProperty Name="Empleados" Relationship="SisFacModel.FK_VENTAS_REFERENCE_EMPLEADO" FromRole="Ventas" ToRole="Empleados" />
+        </EntityType>
+        <Association Name="FK_EMPLEADO_REFERENCE_CARGOS">
+          <End Type="SisFacModel.Cargos" Role="Cargos" Multiplicity="1" />
+          <End Type="SisFacModel.Empleados" Role="Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cargos">
+              <PropertyRef Name="idCargo" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idCargo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRODUCTO_REFERENCE_CATEGORI">
+          <End Type="SisFacModel.Categorias" Role="Categorias" Multiplicity="1" />
+          <End Type="SisFacModel.Productos" Role="Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="idCategoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CIUDADES_REFERENCE_REGIONES">
+          <End Type="SisFacModel.Regiones" Role="Regiones" Multiplicity="0..1" />
+          <End Type="SisFacModel.Ciudades" Role="Ciudades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiones">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Ciudades">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTES_REFERENCE_CIUDADES">
+          <End Type="SisFacModel.Ciudades" Role="Ciudades" Multiplicity="0..1" />
+          <End Type="SisFacModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudades">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_REFERENCE_CIUDADES">
+          <End Type="SisFacModel.Ciudades" Role="Ciudades" Multiplicity="0..1" />
+          <End Type="SisFacModel.Empleados" Role="Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudades">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTES_REFERENCE_REGIONES">
+          <End Type="SisFacModel.Regiones" Role="Regiones" Multiplicity="0..1" />
+          <End Type="SisFacModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiones">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTAS_REFERENCE_CLIENTES">
+          <End Type="SisFacModel.Clientes" Role="Clientes" Multiplicity="1" />
+          <End Type="SisFacModel.Ventas" Role="Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="RUTCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_REFERENCE_PRODUCTO">
+          <End Type="SisFacModel.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="SisFacModel.DetallesVenta" Role="DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="idProducto" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="idProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLES_REFERENCE_VENTAS">
+          <End Type="SisFacModel.Ventas" Role="Ventas" Multiplicity="1" />
+          <End Type="SisFacModel.DetallesVenta" Role="DetallesVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ventas">
+              <PropertyRef Name="idVenta" />
+            </Principal>
+            <Dependent Role="DetallesVenta">
+              <PropertyRef Name="idVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMPLEADO_REFERENCE_REGIONES">
+          <End Type="SisFacModel.Regiones" Role="Regiones" Multiplicity="0..1" />
+          <End Type="SisFacModel.Empleados" Role="Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiones">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VENTAS_REFERENCE_EMPLEADO">
+          <End Type="SisFacModel.Empleados" Role="Empleados" Multiplicity="1" />
+          <End Type="SisFacModel.Ventas" Role="Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="RUT" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="RUTEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SisFacModelStoreContainer" CdmEntityContainer="SisFacEntities">
+          <EntitySetMapping Name="Cargos">
+            <EntityTypeMapping TypeName="SisFacModel.Cargos">
+              <MappingFragment StoreEntitySet="Cargos">
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+                <ScalarProperty Name="idCargo" ColumnName="idCargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="SisFacModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudades">
+            <EntityTypeMapping TypeName="SisFacModel.Ciudades">
+              <MappingFragment StoreEntitySet="Ciudades">
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="SisFacModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="ApMaterno" ColumnName="ApMaterno" />
+                <ScalarProperty Name="ApPaterno" ColumnName="ApPaterno" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="RUTVer" ColumnName="RUTVer" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallesVenta">
+            <EntityTypeMapping TypeName="SisFacModel.DetallesVenta">
+              <MappingFragment StoreEntitySet="DetallesVenta">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+                <ScalarProperty Name="idVenta" ColumnName="idVenta" />
+                <ScalarProperty Name="idDetalleVenta" ColumnName="idDetalleVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="SisFacModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="idCargo" ColumnName="idCargo" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="ApMaterno" ColumnName="ApMaterno" />
+                <ScalarProperty Name="ApPaterno" ColumnName="ApPaterno" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="RUTVer" ColumnName="RUTVer" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="SisFacModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regiones">
+            <EntityTypeMapping TypeName="SisFacModel.Regiones">
+              <MappingFragment StoreEntitySet="Regiones">
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="SisFacModel.Ventas">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="Entregado" ColumnName="Entregado" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="RUTCliente" ColumnName="RUTCliente" />
+                <ScalarProperty Name="RUTEmpleado" ColumnName="RUTEmpleado" />
+                <ScalarProperty Name="TipoVenta" ColumnName="TipoVenta" />
+                <ScalarProperty Name="idVenta" ColumnName="idVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SisFac" ZoomLevel="72">
+        <EntityTypeShape EntityType="SisFacModel.Cargos" Width="1.5" PointX="11" PointY="7.875" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="SisFacModel.Categorias" Width="1.5" PointX="11" PointY="5.875" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="SisFacModel.Ciudades" Width="1.5" PointX="5.875" PointY="6.875" Height="2.172587890625004" />
+        <EntityTypeShape EntityType="SisFacModel.Clientes" Width="1.5" PointX="3" PointY="4.125" Height="4.28790364583334" />
+        <EntityTypeShape EntityType="SisFacModel.DetallesVenta" Width="1.5" PointX="0.75" PointY="3.625" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="SisFacModel.Empleados" Width="1.5" PointX="8.75" PointY="4.75" Height="4.6725065104166683" />
+        <EntityTypeShape EntityType="SisFacModel.Productos" Width="1.5" PointX="11" PointY="2.5" Height="2.749492187499996" />
+        <EntityTypeShape EntityType="SisFacModel.Regiones" Width="1.5" PointX="5.875" PointY="4.25" Height="1.9802864583333397" />
+        <EntityTypeShape EntityType="SisFacModel.Ventas" Width="1.5" PointX="0.875" PointY="6.625" Height="3.1340950520833388" />
+        <AssociationConnector Association="SisFacModel.FK_EMPLEADO_REFERENCE_CARGOS" >
+          <ConnectorPoint PointX="11" PointY="8.6487532552083337" />
+          <ConnectorPoint PointX="10.25" PointY="8.6487532552083337" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_PRODUCTO_REFERENCE_CATEGORI" >
+          <ConnectorPoint PointX="11.75" PointY="5.875" />
+          <ConnectorPoint PointX="11.75" PointY="5.249492187499996" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_CIUDADES_REFERENCE_REGIONES" >
+          <ConnectorPoint PointX="6.625" PointY="6.23028645833334" />
+          <ConnectorPoint PointX="6.625" PointY="6.875" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_CLIENTES_REFERENCE_CIUDADES" >
+          <ConnectorPoint PointX="5.875" PointY="7.6439518229166694" />
+          <ConnectorPoint PointX="4.5" PointY="7.6439518229166694" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_EMPLEADO_REFERENCE_CIUDADES" >
+          <ConnectorPoint PointX="7.375" PointY="7.9612939453125016" />
+          <ConnectorPoint PointX="8.75" PointY="7.9612939453125016" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_CLIENTES_REFERENCE_REGIONES" >
+          <ConnectorPoint PointX="5.875" PointY="5.2401432291666694" />
+          <ConnectorPoint PointX="4.5" PointY="5.2401432291666694" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_VENTAS_REFERENCE_CLIENTES" >
+          <ConnectorPoint PointX="3" PointY="7.5189518229166694" />
+          <ConnectorPoint PointX="2.375" PointY="7.5189518229166694" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_DETALLES_REFERENCE_PRODUCTO" >
+          <ConnectorPoint PointX="11" PointY="3.84375" />
+          <ConnectorPoint PointX="2.25" PointY="3.84375" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_DETALLES_REFERENCE_VENTAS" >
+          <ConnectorPoint PointX="1.5625" PointY="6.625" />
+          <ConnectorPoint PointX="1.5625" PointY="5.9898893229166674" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_EMPLEADO_REFERENCE_REGIONES" >
+          <ConnectorPoint PointX="7.375" PointY="5.4901432291666694" />
+          <ConnectorPoint PointX="8.75" PointY="5.4901432291666694" />
+        </AssociationConnector>
+        <AssociationConnector Association="SisFacModel.FK_VENTAS_REFERENCE_EMPLEADO" >
+          <ConnectorPoint PointX="8.75" PointY="9.2662972005208353" />
+          <ConnectorPoint PointX="2.375" PointY="9.2662972005208353" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
